@@ -1,0 +1,128 @@
+@import "tailwindcss";
+
+:root {
+  font-family: Arial, Helvetica, sans-serif;
+  color: #111;
+  background: #d1d1d1;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+* { box-sizing: border-box; }
+html, body, #root { margin: 0; min-width: 320px; min-height: 100%; }
+body { overflow-x: hidden; background: #d1d1d1; }
+.scene-section {
+  position: relative;
+  height: 300vh;
+  background: #121212;
+}
+
+.scene-track {
+  position: sticky;
+  top: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+  background: #d1d1d1;
+}
+
+.road {
+  position: relative;
+  width: 100vw;
+  height: 200px;
+  overflow: hidden;
+  background: #1e1e1e;
+  isolation: isolate;
+}
+
+.green-trail {
+  position: absolute;
+  z-index: 1;
+  inset: 0 auto 0 0;
+  width: 0;
+  background: #45db7d;
+  will-change: width;
+}
+
+.headline {
+  position: absolute;
+  z-index: 5;
+  top: 15%;
+  left: 5%;
+  display: flex;
+  gap: 0.3rem;
+  width: max-content;
+  margin: 0;
+  color: #111;
+  font-size: 8rem;
+  font-weight: 700;
+  line-height: 1.15;
+  white-space: pre;
+}
+
+.headline-letter { display: inline-block; }
+.headline-space { width: auto; }
+
+.metric {
+  position: absolute;
+  z-index: 5;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 5px;
+  min-height: 150px;
+  margin: 16px;
+  padding: 30px;
+  border-radius: 10px;
+  color: #111;
+  opacity: 0;
+  will-change: transform, opacity;
+}
+
+.metric strong { font-size: 58px; font-weight: 600; line-height: 1.15; }
+.metric span { font-size: 16px; line-height: 1.25; white-space: nowrap; }
+.metric--lime { top: 5%; left: 49%; width: 288px; background: #def54f; font-size: 18px; }
+.metric--blue { bottom: 5%; left: 42.3%; width: 310px; background: #6ac9ff; }
+.metric--charcoal { top: 5%; left: 70.7%; width: 263px; background: #333; color: #fff; }
+.metric--orange { bottom: 5%; left: 64.9%; width: 310px; background: #fa7328; }
+
+.car {
+  position: absolute;
+  z-index: 10;
+  top: 0;
+  left: 0;
+  display: block;
+  height: 200px;
+  width: auto;
+  max-width: none;
+  object-fit: contain;
+  visibility: hidden;
+  will-change: transform, opacity;
+}
+
+@media (max-width: 760px) {
+  .road, .car { height: clamp(112px, 30vw, 160px); }
+  .headline { top: 17%; left: 4%; gap: 0.13rem; font-size: clamp(3rem, 12vw, 5.5rem); }
+  .metric { min-height: 112px; margin: 8px; padding: clamp(12px, 4vw, 22px); border-radius: 8px; }
+  .metric--lime, .metric--blue, .metric--charcoal, .metric--orange { width: 46vw; }
+  .metric strong { font-size: clamp(2rem, 8vw, 3.5rem); }
+  .metric span { max-width: 43vw; font-size: clamp(10px, 2.8vw, 14px); white-space: normal; }
+  .metric--lime { left: 20%; top: 5%; }
+  .metric--blue { left: 5%; bottom: 5%; }
+  .metric--charcoal { left: 48%; top: 5%; }
+  .metric--orange { left: 43%; bottom: 5%; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { scroll-behavior: auto !important; }
+  .scene-section { height: 100vh; }
+  .scene-track { position: relative; }
+  .car, .headline-letter, .metric { opacity: 1 !important; visibility: visible !important; transform: none !important; }
+  .green-trail { width: 24% !important; }
+}
